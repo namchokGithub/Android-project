@@ -23,9 +23,9 @@ class MyRecyclerAdapter(fragment: FragmentActivity, val dataSource: JSONArray) :
 
     class Holder(view : View) : RecyclerView.ViewHolder(view) {
 
-        private val View = view;
+        private val View = view
 
-        lateinit var layout : LinearLayout
+        lateinit var layOut : LinearLayout
         lateinit var titleTextView: TextView
         lateinit var detailTextView: TextView
         lateinit var image: ImageView
@@ -33,7 +33,7 @@ class MyRecyclerAdapter(fragment: FragmentActivity, val dataSource: JSONArray) :
 
         fun Holder(){
 
-            layout = View.findViewById<View>(R.id.recyLayout) as LinearLayout
+            layOut = View.findViewById<View>(R.id.recyview_layout) as LinearLayout
             titleTextView = View.findViewById<View>(R.id.name) as TextView
             detailTextView = View.findViewById<View>(R.id.positon) as TextView
             image = View.findViewById<View>(R.id.imageProfile) as ImageView
@@ -41,7 +41,6 @@ class MyRecyclerAdapter(fragment: FragmentActivity, val dataSource: JSONArray) :
         }
 
     }
-
 
     override fun onCreateViewHolder(parent : ViewGroup, viewType: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.recy_layout_member, parent, false))
@@ -61,10 +60,10 @@ class MyRecyclerAdapter(fragment: FragmentActivity, val dataSource: JSONArray) :
         holder.imageURL = dataSource.getJSONObject(position).getString("image").toString()
 
         Glide.with(thiscontext)
-            .load(dataSource.getJSONObject(position).getString("imageURL").toString())
+            .load(dataSource.getJSONObject(position).getString("image").toString())
             .into(holder.image)
 
-        holder.layout.setOnClickListener{
+        holder.layOut.setOnClickListener{
 
             val MemberDetail = FragmentTask().newInstance(holder.titleTextView.text.toString(), holder.detailTextView.text.toString(), holder.imageURL)
             val fm = thisFragment.supportFragmentManager

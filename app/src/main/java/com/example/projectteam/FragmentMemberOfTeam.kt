@@ -1,8 +1,9 @@
 package com.example.projectteam
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.team.MyRecyclerAdapter
+import com.facebook.FacebookSdk.getApplicationContext
 import com.facebook.login.LoginManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -80,8 +81,24 @@ class FragmentMemberOfTeam : Fragment() {
 
 
         loginButton.setOnClickListener{
-            LoginManager.getInstance().logOut()
-            activity!!.supportFragmentManager.popBackStack()
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
+            builder.setMessage("ต้องการออกจากระบบ?")
+            builder.setPositiveButton("ตกลง"
+            ) { dialog, id ->
+                LoginManager.getInstance().logOut()
+                activity!!.supportFragmentManager.popBackStack()
+            }
+            builder.setNegativeButton("ยกเลิก"
+            ) { dialog, which ->
+                Toast.makeText(
+                    getApplicationContext(),
+                    "ยกเลิก", Toast.LENGTH_SHORT
+                ).show()
+            }
+            builder.show()
+
+
         }
 
 
@@ -95,8 +112,11 @@ class FragmentMemberOfTeam : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 val data = JSONArray()
-                val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!.baseContext)
+
+                val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
+
                 recyclerView.layoutManager = layoutManager
+
                 for (ds in dataSnapshot.children) {
 
                     val jObject = JSONObject()
@@ -104,8 +124,6 @@ class FragmentMemberOfTeam : Fragment() {
                     val firstname = ds.child("firstname").getValue(String::class.java)!!
                     val position = ds.child("position").getValue(String::class.java)!!
                     val image = ds.child("image").getValue(String::class.java)!!
-
-                    Toast.makeText(activity, firstname + "TEst", Toast.LENGTH_SHORT).show()
 
                     jObject.put("key",ds.key)
                     jObject.put("firstname",firstname)
@@ -117,7 +135,6 @@ class FragmentMemberOfTeam : Fragment() {
                 }
 
                 val adapter = MyRecyclerAdapter(activity!!, data)
-
                 recyclerView.adapter = adapter
             }
 
