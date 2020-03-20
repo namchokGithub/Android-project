@@ -101,8 +101,8 @@ class Authen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FacebookSdk.sdkInitialize(getApplicationContext())
-        AppEventsLogger.activateApp(activity!!.baseContext)
+//        FacebookSdk.sdkInitialize(getApplicationContext())
+//        AppEventsLogger.activateApp(activity!!.baseContext)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
