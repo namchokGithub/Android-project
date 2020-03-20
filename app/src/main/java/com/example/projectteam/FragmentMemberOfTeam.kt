@@ -79,7 +79,6 @@ class FragmentMemberOfTeam : Fragment() {
         Name?.let { textUsername.setText(User) }
 
 
-
         loginButton.setOnClickListener{
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
@@ -125,10 +124,22 @@ class FragmentMemberOfTeam : Fragment() {
                     val position = ds.child("position").getValue(String::class.java)!!
                     val image = ds.child("image").getValue(String::class.java)!!
 
+                    val css = ds.child("css").getValue(String::class.java)!!
+                    val php = ds.child("php").getValue(String::class.java)!!
+                    val html = ds.child("html").getValue(String::class.java)!!
+                    val sql = ds.child("sql").getValue(String::class.java)!!
+                    val javaScript = ds.child("javascript").getValue(String::class.java)!!
+
                     jObject.put("key",ds.key)
                     jObject.put("firstname",firstname)
                     jObject.put("position",position)
                     jObject.put("image",image)
+
+                    jObject.put("css",css)
+                    jObject.put("php",php)
+                    jObject.put("html",html)
+                    jObject.put("sql",sql)
+                    jObject.put("javaScript",javaScript)
 
                     data.put(jObject)
 
