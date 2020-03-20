@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -86,12 +88,13 @@ class FragmentMemberOfTeam : Fragment() {
         val mRootRef = FirebaseDatabase.getInstance().reference
         val mMessagesRef = mRootRef.child("team2")
 
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyLayout)
+
         mMessagesRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 val data = JSONArray()
-                val recyclerView: RecyclerView = view.findViewById(R.id.recyLayout)
                 val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!.baseContext)
                 recyclerView.layoutManager = layoutManager
                 for (ds in dataSnapshot.children) {
@@ -99,9 +102,10 @@ class FragmentMemberOfTeam : Fragment() {
                     val jObject = JSONObject()
 
                     val firstname = ds.child("firstname").getValue(String::class.java)!!
-
                     val position = ds.child("position").getValue(String::class.java)!!
                     val image = ds.child("image").getValue(String::class.java)!!
+
+                    Toast.makeText(activity, firstname + "TEst", Toast.LENGTH_SHORT).show()
 
                     jObject.put("key",ds.key)
                     jObject.put("firstname",firstname)
@@ -112,13 +116,14 @@ class FragmentMemberOfTeam : Fragment() {
 
                 }
 
-                val adapter = MyRecyclerAdapter(activity!!.baseContext as FragmentActivity,data)
+                val adapter = MyRecyclerAdapter(activity!!, data)
 
                 recyclerView.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+//                Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show()
             }
 
 

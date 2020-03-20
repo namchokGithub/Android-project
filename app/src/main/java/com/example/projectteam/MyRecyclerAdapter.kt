@@ -56,9 +56,9 @@ class MyRecyclerAdapter(fragment: FragmentActivity, val dataSource: JSONArray) :
 
         holder.Holder()
 
-        holder.titleTextView.text = dataSource.getJSONObject(position).getString("Name").toString()
-        holder.detailTextView.text = dataSource.getJSONObject(position).getString("Description").toString()
-        holder.imageURL = dataSource.getJSONObject(position).getString("imageURL").toString()
+        holder.titleTextView.text = dataSource.getJSONObject(position).getString("firstname").toString()
+        holder.detailTextView.text = dataSource.getJSONObject(position).getString("position").toString()
+        holder.imageURL = dataSource.getJSONObject(position).getString("image").toString()
 
         Glide.with(thiscontext)
             .load(dataSource.getJSONObject(position).getString("imageURL").toString())
