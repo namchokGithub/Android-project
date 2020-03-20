@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.facebook.*
@@ -52,6 +54,19 @@ class Authen : Fragment() {
             LoginManager.getInstance().logOut()
         }
 
+        var btnLogin = view.findViewById<Button>(R.id.btnLogin)
+        var textUser = view.findViewById<EditText>(R.id.etUsername)
+        var textPass = view.findViewById<EditText>(R.id.etPassword)
+
+        btnLogin.setOnClickListener {
+            val profile = FragmentMemberOfTeam().setUser(textUser.text.toString(),textPass.text.toString())
+            val fm = fragmentManager
+            val transaction : FragmentTransaction = fm!!.beginTransaction()
+            transaction.replace(R.id.layout, profile,"fragment_profile")
+            transaction.addToBackStack("fragment_profile")
+            transaction.commit()
+        }
+
         // Callback registration
         facebookSignInButton.registerCallback(callbackManager, object :
             FacebookCallback<LoginResult?> {
@@ -69,9 +84,7 @@ class Authen : Fragment() {
         LoginManager.getInstance().registerCallback(callbackManager,
             object : FacebookCallback<LoginResult?> {
                 override fun onSuccess(loginResult: LoginResult?) { // App code
-
                     handleFacebookAccessToken(loginResult!!.accessToken)
-
                 }
 
                 override fun onCancel() { // App code
@@ -88,14 +101,11 @@ class Authen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         FacebookSdk.sdkInitialize(getApplicationContext())
         AppEventsLogger.activateApp(activity!!.baseContext)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
         callbackManager!!.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }

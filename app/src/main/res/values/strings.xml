@@ -11,5 +11,7 @@
     <!-- Facebook-->
     <string name="facebook_app_id">776591219505029</string>
     <string name="fb_login_protocol_scheme">fb776591219505029</string>
+    <string name="first_name">First name</string>
+    <string name="description">Description</string>
 
 </resources>

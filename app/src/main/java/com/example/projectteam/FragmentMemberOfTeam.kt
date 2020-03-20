@@ -18,6 +18,7 @@ class FragmentMemberOfTeam : Fragment() {
 
     var PhotoURL : String = ""
     var Name : String = ""
+    var User : String = ""
 
     fun newInstance(url: String,name : String): FragmentMemberOfTeam {
 
@@ -29,23 +30,42 @@ class FragmentMemberOfTeam : Fragment() {
 
         return profile
     }
+    fun setUser(user: String, pass : String): FragmentMemberOfTeam {
+
+        val profile = FragmentMemberOfTeam()
+        val bundle = Bundle()
+        bundle.putString("user", user)
+        bundle.putString("pass", pass)
+        profile.setArguments(bundle)
+
+        return profile
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_member_of_team, container, false)
 
         val ivProfilePicture = view.findViewById(R.id.iv_profile) as ImageView
-        val tvName = view.findViewById(R.id.tv_name) as TextView
-        val login_button2 = view.findViewById(R.id.login_button2) as Button
+        val textUsername = view.findViewById(R.id.textUsername) as TextView
+        val loginButton = view.findViewById(R.id.btnLogin) as Button
 
         Glide.with(activity!!.baseContext)
             .load(PhotoURL)
             .into(ivProfilePicture)
 
-        tvName.setText(Name)
+        PhotoURL?.let{
+            Glide.with(activity!!.baseContext)
+                .load("https://www.kindpng.com/picc/m/24-248325_profile-picture-circle-png-transparent-png.png")
+                .into(ivProfilePicture)
+        }
 
-        login_button2.setOnClickListener{
 
+        textUsername.setText(Name)
+        Name?.let { textUsername.setText(User) }
+
+
+
+        loginButton.setOnClickListener{
             LoginManager.getInstance().logOut()
             activity!!.supportFragmentManager.popBackStack()
         }
@@ -61,7 +81,7 @@ class FragmentMemberOfTeam : Fragment() {
         if (bundle != null) {
             PhotoURL = bundle.getString("PhotoURL").toString()
             Name = bundle.getString("Name").toString()
-
+            User = bundle.getString("user").toString()
         }
 
     }
