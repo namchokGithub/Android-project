@@ -14,18 +14,40 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:background="#DD2EFB">
+
+            <TextView
+                android:id="@+id/titleMenu"
+                android:layout_width="196dp"
+                android:layout_height="34dp"
+                android:fontFamily="@font/prompt_medium"
+                android:shadowColor="#000"
+                android:text="@string/team_management"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.827"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15" />
 
             <TextView
                 android:id="@+id/textUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="162dp"
+                android:layout_height="61dp"
                 android:layout_below="@id/iv_profile"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="68dp"
+                android:fontFamily="@font/prompt_medium"
+                android:shadowColor="#000000"
+                android:shadowDx="10"
                 android:text="@string/name"
-                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.763"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,11 +56,14 @@
                 android:layout_width="170dp"
                 android:layout_height="46dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="112dp"
-                android:background="#FBDBDB"
+                android:layout_marginTop="136dp"
+                android:background="#7C9C27B0"
+                android:fontFamily="@font/prompt_medium"
                 android:text="@string/logout"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.755"
+                app:layout_constraintHorizontal_bias="0.788"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +71,7 @@
                 android:id="@+id/iv_profile"
                 android:layout_width="141dp"
                 android:layout_height="141dp"
+                android:src="@drawable/man"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"

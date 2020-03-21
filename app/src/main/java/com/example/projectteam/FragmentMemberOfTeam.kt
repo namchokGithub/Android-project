@@ -63,14 +63,17 @@ class FragmentMemberOfTeam : Fragment() {
         val ivProfilePicture = view.findViewById(R.id.iv_profile) as ImageView
         val textUsername = view.findViewById(R.id.textUsername) as TextView
         val loginButton = view.findViewById(R.id.btnLogin) as Button
+        var checkImage = true
 
-        Glide.with(activity!!.baseContext)
-            .load(PhotoURL)
-            .into(ivProfilePicture)
+        getData(view)
 
         PhotoURL?.let{
+            checkImage = false
+        }
+
+        if (checkImage) {
             Glide.with(activity!!.baseContext)
-                .load("https://www.kindpng.com/picc/m/24-248325_profile-picture-circle-png-transparent-png.png")
+                .load(PhotoURL)
                 .into(ivProfilePicture)
         }
 
@@ -100,9 +103,38 @@ class FragmentMemberOfTeam : Fragment() {
         }
 
 
+        //Instantiate new instance of our class
+        //var getRequest = DataRequest(activity!!, inflater, container)
+        //String to place our result in
+        //getRequest.execute("")
+
+
+        // Inflate the layout for this fragment
+        return view
+
+    }
+
+    private fun loadJsonFromAsset(filename: String, context: Context): String? {
+        val json: String?
+
+        try {
+            val inputStream = context.assets.open(filename)
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+            json = String(buffer, Charsets.UTF_8)
+        } catch (ex: java.io.IOException) {
+            ex.printStackTrace()
+            return null
+        }
+
+        return json
+    }
+
+    private fun getData(view : View) {
         val mRootRef = FirebaseDatabase.getInstance().reference
         val mMessagesRef = mRootRef.child("team2")
-
         val recyclerView: RecyclerView = view.findViewById(R.id.recyLayout)
 
         mMessagesRef.addValueEventListener(object : ValueEventListener {
@@ -155,31 +187,7 @@ class FragmentMemberOfTeam : Fragment() {
 
 
         })
-
-
-        // Inflate the layout for this fragment
-        return view
-
     }
-
-    private fun loadJsonFromAsset(filename: String, context: Context): String? {
-        val json: String?
-
-        try {
-            val inputStream = context.assets.open(filename)
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            json = String(buffer, Charsets.UTF_8)
-        } catch (ex: java.io.IOException) {
-            ex.printStackTrace()
-            return null
-        }
-
-        return json
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,6 +1,7 @@
 package com.example.projectteam
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,12 +14,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
+import com.facebook.FacebookSdk
+import com.facebook.login.LoginManager
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_graph_skill.*
 
 /**
@@ -66,6 +70,7 @@ class FragmentGraphSkill : Fragment() {
         val imageURL = view.findViewById<ImageView>(R.id.imageMember)
 
         val btnBack = view.findViewById<Button>(R.id.Back)
+        val btnChoose = view.findViewById<Button>(R.id.choose)
 
         val textName = view.findViewById<TextView>(R.id.nameMember)
         val textPos = view.findViewById<TextView>(R.id.positionMember)
@@ -95,7 +100,7 @@ class FragmentGraphSkill : Fragment() {
         }
 
         Pie_id = view.findViewById(R.id.pie_id)
-        Pie_Chart(Pie_id)
+        pieChart(Pie_id)
 
         textTitle.text = "คะแนนทักษะของ$name"
         textHtml.text = "HTML $html คะแนน"
@@ -112,14 +117,43 @@ class FragmentGraphSkill : Fragment() {
             .into(imageURL)
 
         btnBack.setOnClickListener {
-            getActivity()?.onBackPressed()
+            activity?.onBackPressed()
+        }
+
+
+        //ประกาศตัวแปร DatabaseReference รับค่า Instance และอ้างถึง path ที่เราต้องการใน database
+        val mRootRef = FirebaseDatabase.getInstance().reference
+
+        //อ้างอิงไปที่ path ที่เราต้องการจะจัดการข้อมูล ตัวอย่างคือ users และ messages
+        val mMember = mRootRef.child("choose member")
+
+        btnChoose.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
+            builder.setMessage("คุณต้องการเลือก $name?")
+            builder.setPositiveButton("ตกลง"
+            ) { dialog, id ->
+                val message = ChooseData(name, true)
+                mMember.push().setValue(message)
+                Toast.makeText(activity, "คุณได้เลือก $name แล้ว", Toast.LENGTH_SHORT).show()
+                activity?.onBackPressed()
+            }
+            builder.setNegativeButton("ยกเลิก"
+            ) { dialog, which ->
+                Toast.makeText(
+                    FacebookSdk.getApplicationContext(),
+                    "ยกเลิก", Toast.LENGTH_SHORT
+                ).show()
+            }
+            builder.show()
+
+
         }
 
 
         return view
     }
 
-    fun Pie_Chart( chart: PieChart){
+    private fun pieChart(chart: PieChart){
 
         //ปิด Description
         chart.description.isEnabled = false
@@ -174,7 +208,7 @@ class FragmentGraphSkill : Fragment() {
         dataset.valueFormatter = PercentFormatter(chart)
 
         // entry label styling
-        chart.setEntryLabelColor(Color.WHITE)
+        chart.setEntryLabelColor(Color.BLACK)
 
         //ข้อความตรงกลางแผนภูมิ
         chart.centerText = "Skill Of Programming"
@@ -182,6 +216,10 @@ class FragmentGraphSkill : Fragment() {
 
     }
 
+    data class ChooseData(
+        var name: String? = "",
+        var status: Boolean
+    )
 
 
 }
