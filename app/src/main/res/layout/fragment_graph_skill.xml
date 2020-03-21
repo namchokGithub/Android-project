@@ -13,55 +13,134 @@
 
         <TextView
             android:id="@+id/nameMember"
-            android:layout_width="149dp"
-            android:layout_height="42dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_below="@id/imageMember"
             android:layout_centerHorizontal="true"
-            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/prompt_medium"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.725"
+            app:layout_constraintHorizontal_bias="0.886"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.405" />
+            app:layout_constraintVertical_bias="0.306" />
 
         <ImageView
             android:id="@+id/imageMember"
             android:layout_width="141dp"
             android:layout_height="141dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="@string/todo"
+            android:isScrollContainer="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintHorizontal_bias="0.125"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.508" />
 
         <TextView
             android:id="@+id/positionMember"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="160dp"
+            android:fontFamily="@font/prompt_medium"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.886"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.662" />
+            app:layout_constraintVertical_bias="0.686" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="700dp"
+        android:layout_width="399dp"
+        android:layout_height="535dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Skill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/prompt_medium"
+            android:gravity="center"
+            android:text="@string/skill_of"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/html"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/prompt_medium"
+            android:text="@string/textview" />
+
+        <TextView
+            android:id="@+id/css"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/prompt_medium"
+            android:text="@string/textview" />
+
+        <TextView
+            android:id="@+id/sql"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/prompt_medium"
+            android:text="@string/textview" />
+
+        <TextView
+            android:id="@+id/php"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/prompt_medium"
+            android:text="@string/textview" />
+
+        <TextView
+            android:id="@+id/javascript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/prompt_medium"
+            android:text="@string/textview" />
+
+        <TextView
+            android:id="@+id/graphScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/prompt_medium"
+            android:gravity="center"
+            android:text="@string/textGraph"
+            android:textSize="20sp" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pie_id"
-            android:layout_width="match_parent"
-            android:layout_height="415dp"
-            android:layout_marginTop="200dp"
-            android:padding="16dp" />
+            android:layout_width="400dp"
+            android:layout_height="224dp"
+            android:padding="16dp">
 
+        </com.github.mikephil.charting.charts.PieChart>
+
+        <Button
+            android:id="@+id/Back"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#2196F3"
+            android:fontFamily="@font/prompt_medium"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </FrameLayout>

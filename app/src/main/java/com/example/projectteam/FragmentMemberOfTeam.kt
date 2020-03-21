@@ -78,7 +78,6 @@ class FragmentMemberOfTeam : Fragment() {
         textUsername.setText(Name)
         Name?.let { textUsername.setText(User) }
 
-
         loginButton.setOnClickListener{
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
@@ -156,21 +155,6 @@ class FragmentMemberOfTeam : Fragment() {
 
 
         })
-
-
-//        val jsonString : String = loadJsonFromAsset("recipes.json", activity!!.baseContext).toString()
-//        val json = JSONObject(jsonString)
-//        val jsonArray = json.getJSONArray("recipes")
-//
-//        val recyclerView: RecyclerView = view.findViewById(R.id.recyLayout)
-//
-//        //ตั้งค่า Layout
-//        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!.baseContext)
-//        recyclerView.layoutManager = layoutManager
-//
-//        //ตั้งค่า Adapter
-//        val adapter = MyRecyclerAdapter(activity!!.baseContext as FragmentActivity,jsonArray)
-//        recyclerView.adapter = adapter
 
 
         // Inflate the layout for this fragment

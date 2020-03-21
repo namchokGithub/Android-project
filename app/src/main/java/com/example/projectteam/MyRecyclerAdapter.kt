@@ -78,12 +78,15 @@ class MyRecyclerAdapter(fragment: FragmentActivity, val dataSource: JSONArray) :
 
         holder.layOut.setOnClickListener{
 
-            val graphSkill = FragmentGraphSkill().newInstance(holder.titleTextView.text.toString(), holder.detailTextView.text.toString(), holder.imageURL)
-            graphSkill.setSkill( holder.css, holder.html, holder.sql, holder.php, holder.javaScript)
+            val skill = arrayOf(holder.css, holder.html, holder.sql, holder.php, holder.javaScript)
+            val graphSkill = FragmentGraphSkill().newInstance(holder.titleTextView.text.toString(), holder.detailTextView.text.toString(), holder.imageURL, skill)
+
+//            Toast.makeText(thisFragment, holder.css, Toast.LENGTH_SHORT).show()
+
             val fm = thisFragment.supportFragmentManager
             val transaction =  fm.beginTransaction()
-            transaction.replace(R.id.layout, graphSkill,"fragment_MemberDetail")
-            transaction.addToBackStack("fragment_MemberDetail")
+            transaction.replace(R.id.layout, graphSkill,"fragment_Graph")
+            transaction.addToBackStack("fragment_Graph")
             transaction.commit()
 
         }

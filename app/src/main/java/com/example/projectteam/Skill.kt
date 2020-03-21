@@ -1,13 +1,13 @@
 package com.example.projectteam
 
-class Skill(var name : String, var score : Float) {
+class SkillData(var name : String, var score : Float) {
 
 
     companion object {
-        fun setScoreOfGraph(size: Int, skill : Array<String>, score : Array<Float>): ArrayList<Skill> {
-            val student: ArrayList<Skill> = ArrayList()
+        fun setScoreOfGraph(size: Int, skill : Array<String>, score : Array<Float>): ArrayList<SkillData> {
+            val student: ArrayList<SkillData> = ArrayList()
             for (i in 0 until size) {
-                student.add(Skill(skill[i], score[i]))
+                student.add(SkillData(skill[i], score[i]))
             }
             return student
         }

@@ -14,5 +14,11 @@
     <string name="first_name">First name</string>
     <string name="description">Description</string>
     <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
+    <string name="skill_of">Skill of</string>
+    <string name="textGraph">กราฟแสดงร้อยละของคะแนนที่ได้</string>
+    <string name="back">กลับ</string>
+    <string name="name">Name</string>
+    <string name="logout">ออกจากระบบ</string>
 
 </resources>
